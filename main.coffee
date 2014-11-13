@@ -43,24 +43,49 @@ class Prop
 changeCase = require 'change-case'
 h = require 'handlebars'
 h.registerHelper 'classify', (name) -> changeCase.pascalCase name
+
+getTypeName = (expr) ->
+  if expr.type.length is 2
+    [a, b] = expr.type
+    isNullable = a is 'null' or b is 'null'
+    if isNullable
+      "#{expr.name}?"
+    else
+      expr.name
+  else
+    expr.name
+
+getTypeExpr = (expr) ->
+  switch expr.type
+    when 'array'
+      getTypeExpr(expr.items)+'[]'
+    when 'string'
+      "string"
+    when 'boolean'
+      "boolean"
+    when 'number', 'integer'
+      'number'
+    else
+      'any'
+
 tag2typeExpr = (expr) ->
   if expr.type
-    switch expr.type
-      when 'string' then 'string'
-      when 'boolean' then 'boolean'
-      when 'number' then 'number'
-      when 'array'
-        tag2typeExpr(expr.items)+'[]'
-      else
-        'any'
+    typeName = getTypeName(expr)
+    typeExpr = getTypeExpr(expr)
+    "#{typeName}: #{typeExpr}"
+  else if expr.properties
+    exprs =
+      for i in expr.properties
+        tag2typeExpr i
+    expr.name + ': {' + exprs.join('; ') + '}'
   else
-    'any'
+    "#{expr.name}: any"
 
 h.registerHelper 'tag2typeExpr', tag2typeExpr
 template = h.compile('''
 declare class {{classify name}} {
   {{#each properties}}
-  public {{name}}: {{tag2typeExpr .}};
+  public {{tag2typeExpr .}};
   {{/each}}
 }
 ''')
@@ -77,3 +102,4 @@ models =
 
 for m in models
   console.log compileToTS m
+  # compileToTS m
