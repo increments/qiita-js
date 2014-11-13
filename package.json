@@ -1,18 +1,29 @@
 {
-  "name": "node-qiita-api",
+  "name": "qiita-js",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "schema-tsifier.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "bin": "./run.js",
+  "author": "mizchi",
+  "license": "MIT",
   "dependencies": {
-    "es6-map-shim": "^0.2.1",
+    "coffee-script": "^1.8.0",
     "handlebars": "^2.0.0",
     "js-yaml": "^3.2.3",
     "lodash": "^2.4.1",
-    "tv4": "^1.1.4"
-  }
+    "optimist": "^0.6.1"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/increments/qiita-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/increments/qiita-js/issues"
+  },
+  "homepage": "https://github.com/increments/qiita-js"
 }
