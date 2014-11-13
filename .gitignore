@@ -53,4 +53,5 @@ node_modules
 # Users Environment Variables
 .lock-wscript
 
-
+kitchen/qiita.js
+kitchen/qiita.ts

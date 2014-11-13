@@ -521,7 +521,7 @@ properties:
         example: "%{Year}/%{month}/%{day}日報"
     links:
     - description: 全てのテンプレート一覧を返します。
-      title: list_templates+path
+      title: list_templates
       method: GET
       href: "/api/v2/templates"
       rel: instances
