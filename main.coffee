@@ -56,7 +56,23 @@ getTypeName = (expr) ->
     expr.name
 
 getTypeExpr = (expr) ->
-  switch expr.type
+  # TODO Fixme
+  if expr.type is undefined
+    expr = type: expr
+
+  type =
+    if typeof expr.type isnt 'string' and expr.type.length is 2
+      [a, b] = expr.type
+      if a is 'null'
+        b
+      else if b is 'null'
+        a
+      else
+        'any'
+    else
+      expr.type
+
+  switch type
     when 'array'
       getTypeExpr(expr.items)+'[]'
     when 'string'
@@ -82,24 +98,30 @@ tag2typeExpr = (expr) ->
     "#{expr.name}: any"
 
 h.registerHelper 'tag2typeExpr', tag2typeExpr
+h.registerHelper 'argnize', (properties, depth = 2) ->
+  depth = parseInt depth, 10
+  # header = ''
+  header = (' ' for i in [1..depth]).join ''
+  properties.map((i) -> header + 'public ' + tag2typeExpr i).join ',\n'
+
 template = h.compile('''
-declare class {{classify name}} {
+declare module Qiita.Entities {
+
+  {{#each models}}
+  export interface {{classify name}}{
   {{#each properties}}
-  public {{tag2typeExpr .}};
+    {{tag2typeExpr .}};
+  {{/each}}
+  }
+
   {{/each}}
 }
 ''')
+
 compileToTS = (m) -> template m
 
-# models
 models =
   for prop, val of doc.properties
     new Prop prop, val
 
-# m = models[0]
-# console.log 'm', util.inspect m, false, null
-# console.log compileToTS m
-
-for m in models
-  console.log compileToTS m
-  # compileToTS m
+console.log compileToTS models: models
