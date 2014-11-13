@@ -1,4 +1,4 @@
-declare module Qiita.Entities {
+declare module Entities {
 
   export interface AccessToken{
     client_id: string;
