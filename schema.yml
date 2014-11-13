@@ -1,0 +1,708 @@
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: Qiita API v2
+links:
+- href: https://qiita.com
+  rel: self
+definitions:
+  comment_id:
+    type: string
+    example: 3391f50c35f953abfc4f
+  created_at:
+    description: リソースが作成された日時を表します。
+    type: string
+    format: date-time
+    example: 2014-09-04T09:54:49+00:00
+  item_id:
+    type: integer
+    example: 1
+  pagination_schema:
+    properties:
+      page:
+        description: ページ番号を1から100の間で指定できます。
+        type: string
+        pattern: "^[0-9]+$"
+        example: 1
+      per_page:
+        description: 1ページあたりに含まれる要素数を1から100の間で指定できます。
+        type: string
+        pattern: "^[0-9]+$"
+        example: 20
+  taggings:
+    description: 紐付けられるタグを表します。Qiita:Team以外では必ず1つ以上のタグが存在します。
+    type: array
+    items:
+      properties:
+        name:
+          type: string
+          example: example tag
+        versions:
+          type: array
+          items:
+            type: string
+            example: 0.0.1
+      required:
+      - name
+    uniqueItems: true
+  user_id:
+    type: string
+    example: yaotti
+  updated_at:
+    "$ref": "#/definitions/created_at"
+
+properties:
+  access_token:
+    title: アクセストークン
+    description: APIリクエスト時に認証を行うためのアクセストークンを表します。
+    properties:
+      client_id:
+        type: string
+        description: 登録されたAPIクライアントを特定するためのIDです。40桁の16進数で表現されます。
+        pattern: "^[0-9a-f]{40}$"
+        example: a91f0396a0968ff593eafdd194e3d17d32c41b1da7b25e873b42e9058058cd9d
+      scopes:
+        type: array
+        description: このアクセストークンに許された操作内容を表します。文字列の配列で表現されます。
+        items:
+          type: string
+          example: 'all'
+      token:
+        type: string
+        description: アクセストークンを表現する文字列です。40桁の16進数で表現されます。
+        pattern: "^[0-9a-f]{40}$"
+        example: ea5d0a593b2655e9568f144fb1826342292f5c6b7d406fda00577b8d1530d8a5
+    required:
+    - client_id
+    - scopes
+    - token
+    links:
+    - description: 与えられた認証情報をもとに新しいアクセストークンを発行します。
+      title: create_access_token
+      method: POST
+      href: "/api/v2/access_tokens"
+      rel: create
+      schema:
+        properties:
+          client_id:
+            "$ref": "#/properties/access_token/properties/client_id"
+          client_secret:
+            description: 登録されたAPIクライアントを認証するための文字列です。
+            type: string
+            pattern: "^[0-9a-f]{40}$"
+            example: 01fc259c31fe39e72c8ef911c3432a33d51e9337ff34c4fac86c491a0d37251f
+          code:
+            description: リダイレクト時に付与される、アクセストークンと交換するための文字列です。
+            type: string
+            pattern: "^[0-9a-f]{40}$"
+            example: fefef5f067171f247fb415e38cb0631797b82f4141dcdee66db846c3ade57a03
+        required:
+        - client_id
+        - client_secret
+        - code
+    - description: 与えられたアクセストークンを失効させ、それ以降利用されないようにします。
+      title: delete_access_token
+      method: DELETE
+      href: "/api/v2/access_tokens/{(#/properties/access_token/properties/token)}"
+      mediaType: 'null'
+  comment:
+    title: コメント
+    description: 投稿に寄せられたコメントを表します。
+    properties:
+      body:
+        description: 入力されたコメントの内容を表す文字列です。
+        type: string
+        example: この投稿は最高。
+      id:
+        description: リソースを特定するためのIDです。URL等に利用されます。
+        type: string
+        example: 3391f50c35f953abfc4f
+        pattern: "^[0-9a-f]{20}$"
+      user:
+        "$ref": "#/properties/user"
+    required:
+    - body
+    - id
+    - user
+    links:
+    - description: 特定のコメントを返します。
+      title: get_comment
+      method: GET
+      href: "/api/v2/comments/{(#/properties/comment/properties/id)}"
+      rel: show
+    - description: 特定のコメントを削除します。
+      title: delete_comment
+      method: DELETE
+      href: "/api/v2/comments/{(#/properties/comment/properties/id)}"
+      rel: delete
+      mediaType: 'null'
+    - description: 特定のコメントを更新します。
+      title: update_comment
+      method: PATCH
+      href: "/api/v2/comments/{(#/properties/comment/properties/id)}"
+      rel: update
+      schema:
+        properties:
+          body:
+            "$ref": "#/properties/comment/properties/body"
+        required:
+        - body
+    - description: 特定の投稿に寄せられたコメント一覧を返します。
+      title: list_item_comments
+      method: GET
+      href: "/api/v2/items/{(#/definitions/item_id)}/comments"
+      rel: instances
+      schema:
+        "$ref": "#/definitions/pagination_schema"
+    - description: 特定の投稿にコメントを付けます。
+      title: create_item_comment
+      method: POST
+      href: "/api/v2/items/{(#/definitions/item_id)}/comments"
+      rel: create
+      schema:
+        properties:
+          body:
+            "$ref": "#/properties/comment/properties/body"
+        required:
+        - body
+    - description: 特定のコメントにThankを付けます。
+      title: thank_comment
+      method: PUT
+      href: "/api/v2/comments/{(#/definitions/comment_id)}/thank"
+      mediaType: 'null'
+    - description: 特定のコメントからThankを外します。
+      title: unthank_comment
+      method: DELETE
+      href: "/api/v2/comments/{(#/definitions/comment_id)}/thank"
+      mediaType: 'null'
+  item:
+    title: 投稿
+    description: ユーザからの投稿を表します。
+    properties:
+      body:
+        description: 投稿の本文です。
+        type: string
+        example: puts 'hello world'
+      coediting:
+        description: この投稿が共同編集状態かどうかを表します。Qiita:Team以外では常にfalseになります。
+        type: boolean
+        example: false
+      created_at:
+        "$ref": "#/definitions/created_at"
+      id:
+        description: リソースを特定するためのIDです。URL等に利用されます。
+        type: string
+        example: 4bd431809afb1bb99e4f
+        pattern: "^[0-9a-f]{20}$"
+      private:
+        description: この投稿が限定共有状態かどうかを表します。Qiita:Teamでは常にfalseになります。
+        type: boolean
+        example: false
+      tags:
+        "$ref": "#/definitions/taggings"
+      title:
+        description: 投稿のタイトルを表します。
+        type: string
+        example: hello world
+      updated_at:
+        "$ref": "#/definitions/updated_at"
+      user:
+        "$ref": "#/properties/user"
+    links:
+    - description: 新着順に全ての投稿一覧を返します。
+      title: list_items
+      method: GET
+      href: "/api/v2/items"
+      rel: instances
+      schema:
+        "$ref": "#/definitions/pagination_schema"
+    - description: 新たに投稿を作成します。
+      title: create_item
+      method: POST
+      href: "/api/v2/items"
+      rel: create
+      schema:
+        properties:
+          body:
+            "$ref": "#/properties/item/properties/body"
+          coediting:
+            "$ref": "#/properties/item/properties/coediting"
+          gist:
+            description: trueの場合、連携アカウントを利用して本文中のコードをGistに投稿します (Qiita:Teamでは無効)。
+            type: boolean
+            example: true
+          private:
+            "$ref": "#/properties/item/properties/private"
+          tags:
+            "$ref": "#/definitions/taggings"
+          title:
+            "$ref": "#/properties/item/properties/title"
+          tweet:
+            description: trueの場合、連携アカウントを利用してTwitterに投稿を共有します (Qiita:Teamでは無効)。
+            type: boolean
+            example: true
+        required:
+        - body
+        - tags
+        - title
+    - description: 特定の投稿を返します。
+      title: get_item
+      method: GET
+      href: "/api/v2/items/{(#/properties/item/properties/id)}"
+      rel: show
+    - description: 特定の投稿を編集します。
+      title: update_item
+      method: PATCH
+      href: "/api/v2/items/{(#/properties/item/properties/id)}"
+      rel: update
+      schema:
+        properties:
+          body:
+            "$ref": "#/properties/item/properties/body"
+          coediting:
+            "$ref": "#/properties/item/properties/coediting"
+          private:
+            "$ref": "#/properties/item/properties/private"
+          tags:
+            "$ref": "#/definitions/taggings"
+          title:
+            "$ref": "#/properties/item/properties/title"
+    - description: 特定の投稿を削除します。
+      title: delete_item
+      method: DELETE
+      href: "/api/v2/items/{(#/properties/item/properties/id)}"
+      rel: delete
+      mediaType: 'null'
+    - description: 特定のタグが付けられた投稿一覧を返します。
+      title: list_tag_items
+      method: GET
+      href: "/api/v2/tags/{(#/properties/tag/properties/id)}/items"
+      rel: instances
+      schema:
+        "$ref": "#/definitions/pagination_schema"
+    - description: 特定のユーザの投稿一覧を返します。
+      title: list_user_items
+      method: GET
+      href: "/api/v2/users/{(#/definitions/user_id)}/items"
+      rel: instances
+      schema:
+        "$ref": "#/definitions/pagination_schema"
+    - description: 特定のユーザがストックした投稿一覧を返します。
+      title: list_user_stocks
+      method: GET
+      href: "/api/v2/users/{(#/definitions/user_id)}/stocks"
+      rel: instances
+      schema:
+        "$ref": "#/definitions/pagination_schema"
+    - description: 特定の投稿をストックします。
+      title: stock_item
+      method: PUT
+      href: "/api/v2/items/{(#/definitions/item_id)}/stock"
+      rel: update
+      mediaType: 'null'
+    - description: 特定の投稿をストックから取り除きます。
+      title: unstock_item
+      method: DELETE
+      href: "/api/v2/items/{(#/definitions/item_id)}/stock"
+      rel: destroy
+      mediaType: 'null'
+    - description: 特定の投稿に「いいね！」を付けます。
+      title: lgtm_item
+      method: PUT
+      href: "/api/v2/items/{(#/definitions/item_id)}/lgtm"
+      rel: update
+      mediaType: 'null'
+    - description: 特定の投稿への「いいね！」を取り消します。
+      title: unlgtm_item
+      method: DELETE
+      href: "/api/v2/items/{(#/definitions/item_id)}/lgtm"
+      rel: delete
+      mediaType: 'null'
+  project:
+    description: Qiita:Team上でのプロジェクトを表します。Qiita:Teamでのみ有効です。
+    title: プロジェクト
+    properties:
+      archived:
+        description: このプロジェクトがアーカイブされているかどうかを表します。
+        type: boolean
+        example: false
+      body:
+        description: プロジェクトページの本文を表します。
+        type: string
+        example: Qiitaプロジェクトへようこそ。
+      created_at:
+        "$ref": "#/definitions/created_at"
+      id:
+        description: リソースを特定するためのIDです。URL等に利用されます。
+        type: string
+        example: 3391f50c35f953abfc4f
+        pattern: "^[0-9a-f]{20}$"
+      name:
+        description: プロジェクト名を表します。
+        type: string
+        example: Qiitaプロジェクト
+      updated_at:
+        "$ref": "#/definitions/updated_at"
+    links:
+    - description: チーム内に存在するプロジェクト一覧を返します。
+      title: list_projects
+      method: GET
+      href: "/api/v2/projects"
+      rel: instances
+      schema:
+        "$ref": "#/definitions/pagination_schema"
+    - description: 特定のプロジェクトを返します。
+      title: get_project
+      method: GET
+      href: "/api/v2/projects/{(#/properties/project/properties/id)}"
+      rel: show
+    - description: プロジェクトを新たに作成します。
+      title: create_project
+      method: POST
+      href: "/api/v2/projects"
+      rel: create
+      schema:
+        properties:
+          archived:
+            "$ref": "#/properties/project/properties/archived"
+          body:
+            "$ref": "#/properties/project/properties/body"
+          tags:
+            "$ref": "#/definitions/taggings"
+          name:
+            "$ref": "#/properties/project/properties/name"
+        required:
+        - body
+        - tags
+        - name
+    - description: 特定のプロジェクトを削除します。
+      title: delete_project
+      method: DELETE
+      href: "/api/v2/projects/{(#/properties/project/properties/id)}"
+      rel: delete
+      mediaType: 'null'
+    - description: 特定のプロジェクトを編集します。
+      title: update_project
+      method: PATCH
+      href: "/api/v2/projects/{(#/properties/project/properties/id)}"
+      rel: update
+      schema:
+        properties:
+          archived:
+            "$ref": "#/properties/project/properties/archived"
+          body:
+            "$ref": "#/properties/project/properties/body"
+          tags:
+            "$ref": "#/definitions/taggings"
+          name:
+            "$ref": "#/properties/project/properties/name"
+  expanded_template:
+    title: 展開済みテンプレート
+    description: テンプレートを保存する前に変数展開後の状態をプレビューできます。Qiita:Teamでのみ有効です。
+    properties:
+      expanded_body:
+        "$ref": "#/properties/template/properties/expanded_body"
+      expanded_tags:
+        "$ref": "#/properties/template/properties/expanded_tags"
+      expanded_title:
+        "$ref": "#/properties/template/properties/expanded_title"
+    required:
+    - expanded_body
+    - expanded_tags
+    - expanded_title
+    links:
+    - description: 受け取ったテンプレート用文字列の変数を展開して返します。
+      title: create_expanded_template
+      method: POST
+      href: "/api/v2/expanded_templates"
+      rel: create
+      schema:
+        properties:
+          body:
+            "$ref": "#/properties/template/properties/body"
+          tags:
+            "$ref": "#/definitions/taggings"
+          title:
+            "$ref": "#/properties/template/properties/title"
+        required:
+        - body
+        - tags
+        - title
+  tag:
+    title: タグ
+    description: 投稿に付けられる個々のタグを表します。
+    properties:
+      followers_count:
+        description: このタグをフォローしているユーザの数を表します。
+        type: integer
+        example: 100
+      icon_url:
+        description: このタグに設定されたアイコン画像のURLを表します。
+        type:
+        - "null"
+        - string
+        example: https://s3-ap-northeast-1.amazonaws.com/qiita-tag-image/9de6a11d330f5694820082438f88ccf4a1b289b2/medium.jpg
+      id:
+        description: タグを特定するための一意な名前です。URL等で利用されます。
+        type: string
+        example: qiita
+      items_count:
+        description: このタグが付けられた投稿の数を表します。
+        type: integer
+        example: 200
+    required:
+    - followers_count
+    - icon_url
+    - id
+    - items_count
+    links:
+    - description: 全てのタグ一覧を返します。
+      title: list_tags
+      method: GET
+      href: "/api/v2/tags"
+      rel: instances
+      schema:
+        "$ref": "#/definitions/pagination_schema"
+    - description: 特定のタグを返します。
+      title: get_tag
+      method: GET
+      href: "/api/v2/tags/{(#/properties/tag/properties/id)}"
+      rel: show
+    - description: 特定のユーザがフォローしているタグ一覧を返します。
+      title: list_user_following_tags
+      method: GET
+      href: "/api/v2/users/{(#/definitions/user_id)}/following_tags"
+      rel: instances
+      schema:
+        "$ref": "#/definitions/pagination_schema"
+  template:
+    title: テンプレート
+    description: 投稿のひな形に利用できるテンプレートを表します。Qiita:Teamでのみ有効です。
+    properties:
+      body:
+        description: テンプレートの本文を表します。
+        type: string
+        example: 日報のひな形です。
+      id:
+        description: テンプレートを特定するための一意なIDです。URL等で利用されます。
+        type: integer
+        example: 1
+      name:
+        description: テンプレートを判別するための名前です。
+        type: string
+        example: 日報
+      expanded_body:
+        description: 変数を展開した状態の本文です。
+        type: string
+        example: 日報のひな形です。
+      expanded_tags:
+        description: 変数を展開した状態のタグ一覧です。
+        type: array
+        items:
+          properties:
+            name:
+              type: string
+              example: example tag
+            versions:
+              type: array
+              items:
+                type: string
+                example: 0.0.1
+          required:
+          - name
+        uniqueItems: true
+      expanded_title:
+        description: 変数を展開した状態のタイトルです。
+        type: string
+        example: 2014/09/26日報
+      tags:
+        "$ref": "#/definitions/taggings"
+      title:
+        description: 生成される投稿のタイトルの雛形を表します。幾つかの変数が使えます。
+        type: string
+        example: "%{Year}/%{month}/%{day}日報"
+    links:
+    - description: 全てのテンプレート一覧を返します。
+      title: list_templates+path
+      method: GET
+      href: "/api/v2/templates"
+      rel: instances
+      schema:
+        "$ref": "#/definitions/pagination_schema"
+    - description: 特定のテンプレートを返します。
+      title: get_template
+      method: GET
+      href: "/api/v2/templates/{(#/properties/template/properties/id)}"
+      rel: show
+    - description: 特定のテンプレートを削除します。
+      title: delete_template
+      method: DELETE
+      href: "/api/v2/templates/{(#/properties/template/properties/id)}"
+      rel: delete
+      mediaType: 'null'
+    - description: 新しくテンプレートを作成します。
+      title: create_template
+      method: POST
+      href: "/api/v2/templates"
+      rel: create
+      schema:
+        properties:
+          body:
+            "$ref": "#/properties/template/properties/body"
+          name:
+            "$ref": "#/properties/template/properties/name"
+          tags:
+            "$ref": "#/definitions/taggings"
+          title:
+            "$ref": "#/properties/template/properties/title"
+        required:
+        - body
+        - name
+        - tags
+        - title
+    - description: 特定のテンプレートを編集します。
+      title: update_template
+      method: PATCH
+      href: "/api/v2/templates/{(#/properties/template/properties/id)}"
+      rel: update
+      schema:
+        properties:
+          body:
+            "$ref": "#/properties/template/properties/body"
+          name:
+            "$ref": "#/properties/template/properties/name"
+          tags:
+            "$ref": "#/definitions/taggings"
+          title:
+            "$ref": "#/properties/template/properties/title"
+  user:
+    title: ユーザ
+    description: ユーザを表します。
+    properties:
+      description:
+        description: 自己紹介文を表します。
+        type:
+        - string
+        - "null"
+        example: Qiita, Qiita:Team(RoR)やKobito(Objective-C)の開発をしています．
+      facebook_id:
+        description: 設定しているFacebookのIDを表します。
+        type:
+        - string
+        - "null"
+        example: yaotti
+      followees_count:
+        description: このユーザがフォローしているユーザの数を表します。
+        type: integer
+        example: 118
+      followers_count:
+        description: このユーザをフォローしているユーザの数を表します。
+        type: integer
+        example: 181
+      github_login_name:
+        description: 設定しているGitHubのIDを表します。
+        type:
+        - string
+        - "null"
+        example: yaotti
+      id:
+        description: ユーザを特定するためのIDです。URL等に使われます。
+        type: string
+        example: yaotti
+        pattern: '^\w[\w-]{1,30}\w$'
+      items_count:
+        description: このユーザの投稿の数を表します。
+        type: integer
+        example: 101
+      linkedin_id:
+        description: 設定しているLinkedInのIDを表します。
+        type:
+        - string
+        - "null"
+        example: yaotti
+      location:
+        description: 設定している居住地を表します。
+        type:
+        - string
+        - "null"
+        example: Tokyo, Japan
+      name:
+        description: 設定している名前を表します。
+        type:
+        - string
+        - "null"
+        example: Hiroshige Umino
+      organization:
+        description: 所属している組織、会社を表します。
+        type:
+        - string
+        - "null"
+        example: Increments Inc
+      profile_image_url:
+        description: 設定しているプロフィール画像のURLを表します。
+        type: string
+        example: https://si0.twimg.com/profile_images/2309761038/1ijg13pfs0dg84sk2y0h_normal.jpeg
+      twitter_screen_name:
+        description: 設定しているTwitterのIDを表します。
+        type:
+        - string
+        - "null"
+        example: yaotti
+      website_url:
+        description: 設定しているサイトのURLを表します。
+        type:
+        - string
+        - "null"
+        example: http://yaotti.hatenablog.com
+    required:
+    - description
+    - facebook_id
+    - followees_count
+    - followers_count
+    - github_login_name
+    - id
+    - items_count
+    - linkedin_id
+    - location
+    - name
+    - organization
+    - profile_image_url
+    - twitter_screen_name
+    - website_url
+    links:
+    - description: 全てのユーザの一覧を返します。
+      title: list_users
+      method: GET
+      href: "/api/v2/users"
+      rel: instances
+      schema:
+        "$ref": "#/definitions/pagination_schema"
+    - description: 特定のユーザを返します。
+      title: get_user
+      method: GET
+      href: "/api/v2/users/{(#/properties/user/properties/id)}"
+      rel: show
+    - description: アクセストークンに紐付いたユーザを返します。
+      title: get_authenticated_user
+      method: GET
+      href: "/api/v2/authenticated_user"
+      rel: show
+    - description: 特定のユーザがフォローしているユーザ一覧を返します。
+      title: list_user_followees
+      method: GET
+      href: "/api/v2/users/{(#/definitions/user_id)}/followees"
+      rel: instances
+      schema:
+        "$ref": "#/definitions/pagination_schema"
+    - description: 特定のユーザをフォローしているユーザ一覧を返します。
+      title: list_user_followers
+      method: GET
+      href: "/api/v2/users/{(#/definitions/user_id)}/followers"
+      rel: instances
+      schema:
+        "$ref": "#/definitions/pagination_schema"
+    - description: 特定の投稿をストックしているユーザ一覧を返します。
+      title: list_item_stockers
+      method: GET
+      href: "/api/v2/items/{(#/definitions/item_id)}/stockers"
+      rel: instances
+      schema:
+        "$ref": "#/definitions/pagination_schema"
