@@ -2,6 +2,16 @@
 
 Qiita api v2 client for browser and commonjs.
 
+```
+npm install qiita-js
+```
+
+or
+
+```
+bower install qiita-js
+```
+
 ## How to use
 
 Get your token at https://qiita.com/settings/tokens/new at first.
@@ -15,20 +25,6 @@ Qiita.Resources.User.get_user('mizchi').then(function(user){
 ```
 
 See qiita.d.ts definitions at `dist/qiita.d.ts`
-
-## Install
-
-### npm
-
-```
-npm install qiita-js
-```
-
-### bower
-
-```
-bower install qiita-js
-```
 
 ## LICENSE
 
