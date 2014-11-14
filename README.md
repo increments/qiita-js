@@ -1,6 +1,6 @@
 # qiita-js
 
-Qiita api v2 client for browser and commonjs.
+[Qiita](http://qiita.com/) api v2 client for browser and commonjs.
 
 Read API detail at http://qiita.com/api/v2/docs or see `dist/qiita.d.ts` as typescript definitions.
 
