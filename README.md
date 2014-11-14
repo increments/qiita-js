@@ -12,13 +12,21 @@ or
 bower install qiita-js
 ```
 
+Now browser client needs `window.jQuery` to request server.
+I will remove this dependency later but not yet. Sorry...
+
 ## How to use
 
 Get your token at https://qiita.com/settings/tokens/new at first.
 
 ```javascript
-// var Qiita = requrie('qiita-js'); // require in commonjs env
+// require in commonjs env
+var Qiita = requrie('qiita-js');
+
+// set your token
 Qiita.setToken('<your token>');
+
+// fetch resources!
 Qiita.Resources.User.get_user('mizchi').then(function(user){
 	console.log(user);
 })
