@@ -1,0 +1,17 @@
+{
+  "name": "qiita-js",
+  "main": "dist/qiita-browser.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/increments/qiita-js",
+  "authors": [
+    "Koutarou Chikuba <miz404@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

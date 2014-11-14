@@ -1,7 +1,7 @@
 {
   "name": "qiita-js",
   "version": "1.0.0",
-  "main": "schema-tsifier.js",
+  "main": "dist/qiita-commonjs.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
