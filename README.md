@@ -15,7 +15,7 @@ bower install qiita-js
 Now browser client needs `window.jQuery` to request to server.
 I will remove this dependency later but not yet. Sorry...
 
-## How to use
+## How to try
 
 Get your token at https://qiita.com/settings/tokens/new at first.
 
