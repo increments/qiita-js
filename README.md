@@ -43,6 +43,11 @@ echo '{"token": "your token"}' > test/token.json
 npm test
 ```
 
+## TODO
+
+- Get oauth key by redirection flow
+- Remove jquery dependency on browser
+
 ## LICENSE
 
 MIT
