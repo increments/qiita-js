@@ -1,20 +1,15 @@
 {
   "name": "qiita-js",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "dist/qiita-commonjs.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "bin": "./run.js",
   "author": "mizchi",
   "license": "MIT",
   "dependencies": {
     "bluebird": "^2.3.11",
-    "coffee-script": "^1.8.0",
-    "handlebars": "^2.0.0",
-    "js-yaml": "^3.2.3",
     "lodash": "^2.4.1",
-    "optimist": "^0.6.1",
     "qs": "^2.3.3",
     "request": "^2.48.0"
   },
