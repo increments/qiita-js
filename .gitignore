@@ -55,3 +55,4 @@ node_modules
 
 kitchen/qiita.js
 kitchen/qiita.ts
+kitchen/qiita.d.ts
