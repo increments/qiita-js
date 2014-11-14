@@ -9,11 +9,14 @@
   "author": "mizchi",
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^2.3.11",
     "coffee-script": "^1.8.0",
     "handlebars": "^2.0.0",
     "js-yaml": "^3.2.3",
     "lodash": "^2.4.1",
-    "optimist": "^0.6.1"
+    "optimist": "^0.6.1",
+    "qs": "^2.3.3",
+    "request": "^2.48.0"
   },
   "devDependencies": {
     "coffee-script": "^1.8.0"

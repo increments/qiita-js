@@ -2,10 +2,17 @@ Qiita.setToken = function(token){
     Qiita._token = token;
 }
 
-Qiita.Resources.setRequester(function(method, endpoint, params){
+Qiita.setEndpoint = function(endpoint){
+    Qiita._endpoint = endpoint;
+}
+
+Qiita._endpoint = 'https://qiita.com';
+
+Qiita.setRequester(function(method, endpoint, params){
   if(!Qiita._token) throw 'you should set token by Qiita.setToken(<your token>)';
+
   if(jQuery) {
-    var dfd = jQuery.ajax(endpoint, {
+    var dfd = jQuery.ajax(Qiita._endpoint+endpoint, {
       method: method,
       data: params,
       beforeSend: function(xhr){
@@ -14,10 +21,16 @@ Qiita.Resources.setRequester(function(method, endpoint, params){
     });
     return {
       then: function(f){
-        dfd.done(f)
+        return dfd.done(f)
       }
     };
   } else {
      throw 'TODO: implement without jquery'
   }
 });
+
+if(typeof module === 'object' && typeof require === 'function'){
+    module.exports = Qiita;
+} else {
+    window.Qitia = Qiita;
+}
