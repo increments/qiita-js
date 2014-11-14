@@ -12,7 +12,7 @@ or
 bower install qiita-js
 ```
 
-Now browser client needs `window.jQuery` to request server.
+Now browser client needs `window.jQuery` to request to server.
 I will remove this dependency later but not yet. Sorry...
 
 ## How to use
@@ -21,7 +21,7 @@ Get your token at https://qiita.com/settings/tokens/new at first.
 
 ```javascript
 // require in commonjs env
-var Qiita = requrie('qiita-js');
+var Qiita = require('qiita-js');
 
 // set your token
 Qiita.setToken('<your token>');
