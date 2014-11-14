@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "dist/qiita-commonjs.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register"
   },
   "author": "mizchi",
   "license": "MIT",
@@ -11,12 +11,14 @@
     "bluebird": "^2.3.11",
     "lodash": "^2.4.1",
     "qs": "^2.3.3",
-    "request": "^2.48.0",
-    "schema-tsifier": "^1.1.5",
-    "typescript": "^1.3.0"
+    "request": "^2.48.0"
   },
   "devDependencies": {
-    "coffee-script": "^1.8.0"
+    "coffee-script": "^1.8.0",
+    "mocha": "^2.0.1",
+    "coffee-script": "^1.8.0",
+    "schema-tsifier": "^1.1.5",
+    "typescript": "^1.3.0"
   },
   "repository": {
     "type": "git",

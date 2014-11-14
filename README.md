@@ -26,6 +26,15 @@ Qiita.Resources.User.get_user('mizchi').then(function(user){
 
 See qiita.d.ts definitions at `dist/qiita.d.ts`
 
+## How to test
+
+Use your token.
+
+```
+echo '{"token": "your token"}' > test/token.json
+npm test
+```
+
 ## LICENSE
 
 MIT
