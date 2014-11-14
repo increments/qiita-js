@@ -2,8 +2,7 @@
 
 Qiita api v2 client for browser and commonjs.
 
-Show detail in http://qiita.com/api/v2/docs 
-
+Read API detail at http://qiita.com/api/v2/docs or see `dist/qiita.d.ts` as typescript definitions.
 
 ```
 npm install qiita-js
@@ -20,7 +19,7 @@ I will remove this dependency later but not yet. Sorry...
 
 ## How to try
 
-Get your token at https://qiita.com/settings/tokens/new at first.
+Get your token by https://qiita.com/settings/tokens/new
 
 ```javascript
 // require in commonjs env
@@ -32,14 +31,12 @@ Qiita.setToken('<your token>');
 // fetch resources!
 Qiita.Resources.User.get_user('mizchi').then(function(user){
 	console.log(user);
-})
+});
 ```
-
-See qiita.d.ts definitions at `dist/qiita.d.ts`
 
 ## How to test
 
-Use your token.
+Use your token to run tests.
 
 ```
 echo '{"token": "your token"}' > test/token.json
@@ -48,7 +45,7 @@ npm test
 
 ## TODO
 
-- Get oauth key by redirection flow
+- Support getting oauth key by redirection flow
 - Remove jquery dependency on browser
 
 ## LICENSE
