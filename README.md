@@ -2,6 +2,9 @@
 
 Qiita api v2 client for browser and commonjs.
 
+Show detail in http://qiita.com/api/v2/docs 
+
+
 ```
 npm install qiita-js
 ```
