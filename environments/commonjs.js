@@ -7,31 +7,21 @@ Qiita.setEndpoint = function(endpoint){
 }
 
 Qiita._endpoint = 'https://qiita.com';
-
 var Promise = require('bluebird')
-var request = require('request');
-var qs = require('qs');
+var r = require('request-json');
 
 Qiita.setRequester(function(method, endpoint, params){
   return new Promise(function(done){
-    var options = {
-      url: Qiita._endpoint+endpoint,
-      method: method,
-      json: true,
-      headers: {
-        "Authorization": 'Bearer '+Qiita._token
-      }
-    };
+    var cli = r.newClient(Qiita._endpoint);
+    cli.headers.Authorization = 'Bearer '+Qiita._token;
 
-    if(method === 'GET'){
-      options.url += '?' + qs.stringify(params);
-    } else {
-      options.form = params;
-    }
+    var m = method.toLowerCase()
+    if(m === 'delete') m = 'del';
 
-    request(options, function(err, res, body){
-        done(body);
-    });
+    cli[m](endpoint, params, function(err, resp, body){
+      done(body);
+    })
   });
 });
+
 module.exports = Qiita;
