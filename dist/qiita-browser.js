@@ -212,9 +212,13 @@ Qiita.setRequester(function(method, endpoint, params){
   if(!Qiita._token) throw 'you should set token by Qiita.setToken(<your token>)';
 
   if(jQuery) {
+    if(method !== 'GET') params = JSON.stringify(params);
+
     var dfd = jQuery.ajax(Qiita._endpoint+endpoint, {
       method: method,
       data: params,
+      contentType: 'application/json',
+      dataType: "json",
       beforeSend: function(xhr){
         xhr.setRequestHeader("Authorization", 'Bearer '+Qiita._token);
       }
