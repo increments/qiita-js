@@ -217,6 +217,7 @@ Qiita.setRequester(function(method, endpoint, params){
 
     var m = method.toLowerCase()
     if(m === 'delete') m = 'del';
+    if(m === 'get') params = {qs: params};
 
     cli[m](endpoint, params, function(err, resp, body){
       done(body);
