@@ -80,6 +80,10 @@ var Qiita;
             Item.list_user_stocks = function (id, params) {
                 return request('GET', '/api/v2/users/' + id + '/stocks', params);
             };
+            Item.get_item_stock = function (id, params) {
+                if (params === void 0) { params = {}; }
+                return request('GET', '/api/v2/items/' + id + '/stock', params);
+            };
             Item.stock_item = function (id, params) {
                 if (params === void 0) { params = {}; }
                 return request('PUT', '/api/v2/items/' + id + '/stock', params);
@@ -144,9 +148,31 @@ var Qiita;
             Tag.list_user_following_tags = function (id, params) {
                 return request('GET', '/api/v2/users/' + id + '/following_tags', params);
             };
+            Tag.get_tag_following = function (id, params) {
+                if (params === void 0) { params = {}; }
+                return request('GET', '/api/v2/tags/' + id + '/following', params);
+            };
+            Tag.follow_tag = function (id, params) {
+                if (params === void 0) { params = {}; }
+                return request('PUT', '/api/v2/tags/' + id + '/following', params);
+            };
+            Tag.unfollow_tag = function (id, params) {
+                if (params === void 0) { params = {}; }
+                return request('DELETE', '/api/v2/tags/' + id + '/following', params);
+            };
             return Tag;
         })();
         Resources.Tag = Tag;
+        var Team = (function () {
+            function Team() {
+            }
+            Team.list_teams = function (params) {
+                if (params === void 0) { params = {}; }
+                return request('GET', '/api/v2/teams', params);
+            };
+            return Team;
+        })();
+        Resources.Team = Team;
         var Template = (function () {
             function Template() {
             }
@@ -192,6 +218,18 @@ var Qiita;
             };
             User.list_item_stockers = function (id, params) {
                 return request('GET', '/api/v2/items/' + id + '/stockers', params);
+            };
+            User.get_user_following = function (id, params) {
+                if (params === void 0) { params = {}; }
+                return request('GET', '/api/v2/users/' + id + '/following', params);
+            };
+            User.follow_user = function (id, params) {
+                if (params === void 0) { params = {}; }
+                return request('PUT', '/api/v2/users/' + id + '/following', params);
+            };
+            User.unfollow_user = function (id, params) {
+                if (params === void 0) { params = {}; }
+                return request('DELETE', '/api/v2/users/' + id + '/following', params);
             };
             return User;
         })();
