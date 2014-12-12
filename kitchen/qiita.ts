@@ -9,7 +9,9 @@ module Qiita {
 
     export interface Comment {
       body: string;
+      created_at: string;
       id: string;
+      updated_at: any;
       user: {description?: string; facebook_id?: string; followees_count: number; followers_count: number; github_login_name?: string; id: string; items_count: number; linkedin_id?: string; location?: string; name?: string; organization?: string; profile_image_url: string; twitter_screen_name?: string; website_url?: string};
     }
 
@@ -22,6 +24,7 @@ module Qiita {
       tags: any[];
       title: string;
       updated_at: any;
+      url: string;
       user: {description?: string; facebook_id?: string; followees_count: number; followers_count: number; github_login_name?: string; id: string; items_count: number; linkedin_id?: string; location?: string; name?: string; organization?: string; profile_image_url: string; twitter_screen_name?: string; website_url?: string};
     }
 
@@ -45,6 +48,11 @@ module Qiita {
       icon_url?: string;
       id: string;
       items_count: number;
+    }
+
+    export interface Team {
+      id: string;
+      name: string;
     }
 
     export interface Template {
@@ -267,6 +275,16 @@ module Qiita {
         );
       }
 
+      public static get_item_stock(
+        id: string, params = {}
+      ): Thenable<any> {
+        return request(
+          'GET',
+           '/api/v2/items/' + id + '/stock' ,
+          params
+        );
+      }
+
       public static stock_item(
         id: string, params = {}
       ): Thenable<any> {
@@ -405,6 +423,49 @@ module Qiita {
           params
         );
       }
+
+      public static get_tag_following(
+        id: string, params = {}
+      ): Thenable<any> {
+        return request(
+          'GET',
+           '/api/v2/tags/' + id + '/following' ,
+          params
+        );
+      }
+
+      public static follow_tag(
+        id: string, params = {}
+      ): Thenable<any> {
+        return request(
+          'PUT',
+           '/api/v2/tags/' + id + '/following' ,
+          params
+        );
+      }
+
+      public static unfollow_tag(
+        id: string, params = {}
+      ): Thenable<any> {
+        return request(
+          'DELETE',
+           '/api/v2/tags/' + id + '/following' ,
+          params
+        );
+      }
+    }
+
+    export class Team {
+
+      public static list_teams(
+        params = {}
+      ): Thenable<any> {
+        return request(
+          'GET',
+           '/api/v2/teams' ,
+          params
+        );
+      }
     }
 
     export class Template {
@@ -518,6 +579,36 @@ module Qiita {
         return request(
           'GET',
            '/api/v2/items/' + id + '/stockers' ,
+          params
+        );
+      }
+
+      public static get_user_following(
+        id: string, params = {}
+      ): Thenable<any> {
+        return request(
+          'GET',
+           '/api/v2/users/' + id + '/following' ,
+          params
+        );
+      }
+
+      public static follow_user(
+        id: string, params = {}
+      ): Thenable<any> {
+        return request(
+          'PUT',
+           '/api/v2/users/' + id + '/following' ,
+          params
+        );
+      }
+
+      public static unfollow_user(
+        id: string, params = {}
+      ): Thenable<any> {
+        return request(
+          'DELETE',
+           '/api/v2/users/' + id + '/following' ,
           params
         );
       }

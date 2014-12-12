@@ -14,7 +14,7 @@ definitions:
     example: 2014-09-04T09:54:49+00:00
   item_id:
     type: integer
-    example: 1
+    example: 4bd431809afb1bb99e4f
   pagination_schema:
     properties:
       page:
@@ -48,7 +48,6 @@ definitions:
     example: yaotti
   updated_at:
     "$ref": "#/definitions/created_at"
-
 properties:
   access_token:
     title: アクセストークン
@@ -64,7 +63,7 @@ properties:
         description: このアクセストークンに許された操作内容を表します。文字列の配列で表現されます。
         items:
           type: string
-          example: 'all'
+          example: 'read_qiita'
       token:
         type: string
         description: アクセストークンを表現する文字列です。40桁の16進数で表現されます。
@@ -111,11 +110,15 @@ properties:
         description: 入力されたコメントの内容を表す文字列です。
         type: string
         example: この投稿は最高。
+      created_at:
+        "$ref": "#/definitions/created_at"
       id:
         description: リソースを特定するためのIDです。URL等に利用されます。
         type: string
         example: 3391f50c35f953abfc4f
         pattern: "^[0-9a-f]{20}$"
+      updated_at:
+        "$ref": "#/definitions/updated_at"
       user:
         "$ref": "#/properties/user"
     required:
@@ -204,6 +207,10 @@ properties:
         example: hello world
       updated_at:
         "$ref": "#/definitions/updated_at"
+      url:
+        description: 投稿のURLを表します。
+        type: string
+        example: https://qiita.com/yaotti/items/4bd431809afb1bb99e4f
       user:
         "$ref": "#/properties/user"
     links:
@@ -292,6 +299,12 @@ properties:
       rel: instances
       schema:
         "$ref": "#/definitions/pagination_schema"
+    - description: 特定の投稿をストックしている場合に204を返します。
+      title: get_item_stock
+      method: GET
+      href: "/api/v2/items/{(#/definitions/item_id)}/stock"
+      rel: show
+      mediaType: 'null'
     - description: 特定の投稿をストックします。
       title: stock_item
       method: PUT
@@ -473,6 +486,45 @@ properties:
       rel: instances
       schema:
         "$ref": "#/definitions/pagination_schema"
+    - description: 特定のタグをフォローしている場合に204を返します。
+      title: get_tag_following
+      method: GET
+      href: "/api/v2/tags/{(#/properties/tag/properties/id)}/following"
+      rel: show
+      mediaType: 'null'
+    - description: 特定のタグをフォローします。
+      title: follow_tag
+      method: PUT
+      href: "/api/v2/tags/{(#/properties/tag/properties/id)}/following"
+      rel: update
+      mediaType: 'null'
+    - description: 特定のタグへのフォローを解除します。
+      title: unfollow_tag
+      method: DELETE
+      href: "/api/v2/tags/{(#/properties/tag/properties/id)}/following"
+      rel: destroy
+      mediaType: 'null'
+  team:
+    title: チーム
+    description: Qiita:Team上で所属しているチームを表します。Qiita:Teamでのみ利用します。
+    properties:
+      id:
+        description: チームを特定するための一意なIDです。URL等で利用されます。
+        type: string
+        example: increments
+      name:
+        description: チームに設定している名前を表します。
+        type: string
+        example: Increments Inc.
+    required:
+    - id
+    - name
+    links:
+    - description: 現在のリクエストで認証されているユーザが所属している全てのチームを返します。
+      title: list_teams
+      method: GET
+      href: "/api/v2/teams"
+      rel: instances
   template:
     title: テンプレート
     description: 投稿のひな形に利用できるテンプレートを表します。Qiita:Teamでのみ有効です。
@@ -706,3 +758,18 @@ properties:
       rel: instances
       schema:
         "$ref": "#/definitions/pagination_schema"
+    - description: "特定のユーザをフォローしている場合に204を返します。"
+      title: get_user_following
+      method: GET
+      href: "/api/v2/users/{(#/definitions/user_id)}/following"
+      mediaType: 'null'
+    - description: "特定のユーザをフォローします。"
+      title: follow_user
+      method: PUT
+      href: "/api/v2/users/{(#/definitions/user_id)}/following"
+      mediaType: 'null'
+    - description: "特定のユーザへのフォローを外します。"
+      title: unfollow_user
+      method: DELETE
+      href: "/api/v2/users/{(#/definitions/user_id)}/following"
+      mediaType: 'null'
