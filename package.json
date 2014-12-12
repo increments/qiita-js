@@ -1,6 +1,6 @@
 {
   "name": "qiita-js",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "main": "dist/qiita-commonjs.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register"
