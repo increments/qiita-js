@@ -9,6 +9,7 @@ declare module Qiita {
             body: string;
             created_at: string;
             id: string;
+            rendered_body: string;
             updated_at: any;
             user: {
                 description?: string;
@@ -33,6 +34,7 @@ declare module Qiita {
             created_at: string;
             id: string;
             private: boolean;
+            rendered_body: string;
             tags: any[];
             title: string;
             updated_at: any;

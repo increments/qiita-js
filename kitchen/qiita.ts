@@ -11,6 +11,7 @@ module Qiita {
       body: string;
       created_at: string;
       id: string;
+      rendered_body: string;
       updated_at: any;
       user: {description?: string; facebook_id?: string; followees_count: number; followers_count: number; github_login_name?: string; id: string; items_count: number; linkedin_id?: string; location?: string; name?: string; organization?: string; profile_image_url: string; twitter_screen_name?: string; website_url?: string};
     }
@@ -21,6 +22,7 @@ module Qiita {
       created_at: string;
       id: string;
       private: boolean;
+      rendered_body: string;
       tags: any[];
       title: string;
       updated_at: any;
