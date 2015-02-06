@@ -117,6 +117,10 @@ properties:
         type: string
         example: 3391f50c35f953abfc4f
         pattern: "^[0-9a-f]{20}$"
+      rendered_body:
+        description: HTMLに変換された投稿の本文です。
+        example: "<h1>Example</h1>"
+        type: string
       updated_at:
         "$ref": "#/definitions/updated_at"
       user:
@@ -199,6 +203,10 @@ properties:
         description: この投稿が限定共有状態かどうかを表します。Qiita:Teamでは常にfalseになります。
         type: boolean
         example: false
+      rendered_body:
+        description: HTMLに変換された投稿の本文です。
+        example: "<h1>Example</h1>"
+        type: string
       tags:
         "$ref": "#/definitions/taggings"
       title:
