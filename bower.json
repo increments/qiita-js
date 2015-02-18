@@ -1,6 +1,6 @@
 {
   "name": "qiita-js",
-  "main": "dist/qiita-browser.js",
+  "main": "dist/qiita.js",
   "version": "0.1.0",
   "homepage": "https://github.com/increments/qiita-js",
   "authors": [
