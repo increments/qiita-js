@@ -236,3 +236,4 @@ var Qiita;
         Resources.User = User;
     })(Resources = Qiita.Resources || (Qiita.Resources = {}));
 })(Qiita || (Qiita = {}));
+module.exports = Qiita;
