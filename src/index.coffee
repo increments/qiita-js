@@ -6,15 +6,15 @@ Qiita.setEndpoint = (endpoint) -> Qiita._endpoint = endpoint
 Qiita.setRequester (method, api, params) ->
   if !Promise?
     return new Promise.reject 'You should require promise or its shim'
-
   new Promise (done, reject) ->
     url = Qiita._endpoint+api
     req =
-      if method is 'get'
-        request.get url
+      if method is 'GET'
+        request
+        .get url
         .query params
       else
-        request[method.toLowerCase()] url
+        request[method.toLowerCase()](url)
         .send params
     req
       .set Authorization: 'Bearer ' + Qiita._token

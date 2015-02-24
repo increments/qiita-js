@@ -1529,16 +1529,13 @@ Qiita.setEndpoint = function(endpoint) {
 };
 
 Qiita.setRequester(function(method, api, params) {
-  if (Qiita._token == null) {
-    return new Promise.reject('you should set token by Qiita.setToken(<your token>)');
-  }
-  if ((typeof Promise === "undefined" || Promise === null) && (typeof callback === "undefined" || callback === null)) {
+  if (typeof Promise === "undefined" || Promise === null) {
     return new Promise.reject('You should require promise or its shim');
   }
   return new Promise(function(done, reject) {
     var req, url;
     url = Qiita._endpoint + api;
-    req = method === 'get' ? request.get(url).query(params) : request[method.toLowerCase()](url).send(params);
+    req = method === 'GET' ? request.get(url).query(params) : request[method.toLowerCase()](url).send(params);
     return req.set({
       Authorization: 'Bearer ' + Qiita._token
     }).set('Accept', 'application/json').end(function(error, res) {
@@ -1546,7 +1543,10 @@ Qiita.setRequester(function(method, api, params) {
         return reject(error);
       }
       if (parseInt(res.statusCode, 10) >= 400) {
-        return reject(res.error);
+        return reject({
+          error: res.error,
+          status: res.statusCode
+        });
       }
       return done(res.body);
     });
