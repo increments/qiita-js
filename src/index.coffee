@@ -22,7 +22,8 @@ Qiita.setRequester (method, api, params) ->
       .end (error, res) ->
         if error then return reject(error)
         if parseInt(res.statusCode, 10) >= 400
-          return reject error: res.error, status:res.statusCode
+          error = new Error 'qiita-js request error:' + method + ' ' +  url + '\n' + res.body.error
+          return reject error
         done(res.body)
 
 module.exports = Qiita
