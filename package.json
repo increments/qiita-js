@@ -1,6 +1,6 @@
 {
   "name": "qiita-js",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "main": "lib/index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register"
