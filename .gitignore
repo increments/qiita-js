@@ -54,3 +54,4 @@ node_modules
 .lock-wscript
 
 test/token.json
+lib

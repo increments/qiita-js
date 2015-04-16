@@ -3,19 +3,18 @@
   "version": "0.2.5",
   "main": "lib/index.js",
   "scripts": {
+    "prepublish": "$(npm bin)/coffee -o lib -c src/*.coffee",
     "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register"
   },
   "author": "mizchi",
   "license": "MIT",
   "dependencies": {
-    "superagent": "^0.21.0"
+    "superagent-promise": "^0.2.0"
   },
   "devDependencies": {
-    "bluebird": "^2.9.9",
     "coffee-script": "^1.8.0",
     "coffeeify": "^1.0.0",
     "mocha": "^2.0.1",
-    "promise": "^6.1.0",
     "schema-tsifier": "^1.1.6",
     "typescript": "^1.4.1"
   },
