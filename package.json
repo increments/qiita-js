@@ -1,6 +1,6 @@
 {
   "name": "qiita-js",
-  "version": "0.2.5",
+  "version": "0.3.0-alpha",
   "main": "lib/index.js",
   "scripts": {
     "prepublish": "$(npm bin)/coffee -o lib -c src/*.coffee",
