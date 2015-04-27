@@ -1,15 +1,12 @@
 {
   "name": "qiita-js",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "main": "lib/index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register"
   },
   "author": "mizchi",
   "license": "MIT",
-  "dependencies": {
-    "superagent": "^0.21.0"
-  },
   "devDependencies": {
     "bluebird": "^2.9.9",
     "coffee-script": "^1.8.0",
@@ -17,6 +14,7 @@
     "mocha": "^2.0.1",
     "promise": "^6.1.0",
     "schema-tsifier": "^1.1.6",
+    "isomorphic-fetch": "^2.0.2",
     "typescript": "^1.4.1"
   },
   "repository": {

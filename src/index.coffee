@@ -1,32 +1,36 @@
-request = require 'superagent'
 Qiita = require '../kitchen/qiita'
-
 Qiita.setToken = (token) -> Qiita._token = token
 Qiita.setEndpoint = (endpoint) -> Qiita._endpoint = endpoint
-Qiita.setUserAgent = (ua) -> Qiita._ua = ua
-
 Qiita.setRequester (method, api, params) ->
-  if !Promise?
-    return new Promise.reject 'You should require promise or its shim'
-  new Promise (done, reject) ->
-    url = Qiita._endpoint+api
-    req =
-      if method is 'GET'
-        request
-        .get url
-        .query params
-      else
-        request[method.toLowerCase()](url)
-        .send params
-    req
-      .set Authorization: 'Bearer ' + Qiita._token
-      .set 'Accept', 'application/json'
-      # .set 'User-Agent', (Qiita._ua ? 'qiita-js/0.2')
-      .end (error, res) ->
-        if error then return reject(error)
-        if parseInt(res.statusCode, 10) >= 400
-          error = new Error 'qiita-js request error:' + method + ' ' +  url + ' ' + JSON.stringify(params) + '' + '\n' + res.body.error
-          return reject error
-        done(res.body)
+  # Retrieve token on fetch start
+  {_token, _endpoint} = Qiita
+  url = _endpoint + api
+  fetching =
+    if method is 'GET'
+      query = (k + '=' + v for k, v of params).join('&')
+      fetch(url + "?" + query,
+        method: 'GET'
+        headers:
+          Authorization: 'Bearer ' + _token
+          'Content-Type': 'application/json'
+          Accept: 'application/json'
+      )
+    else
+      url = _endpoint + api
+      fetch(url,
+        method: method
+        headers:
+          Authorization: 'Bearer ' + _token
+          Accept: 'application/json'
+          'Content-Type': 'application/json'
+        body: JSON.stringify(params)
+      )
+  fetching
+  .then (res) ->
+    if parseInt(res.statusCode, 10) >= 400
+      error = new Error 'qiita-js request error:' + method + ' ' +  url + ' ' + JSON.stringify(params) + '' + '\n' + res.body.error
+      return Promise.reject(error)
+    # res.body._header = res.header
+    res.json()
 
 module.exports = Qiita

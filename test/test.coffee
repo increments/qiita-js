@@ -1,4 +1,5 @@
 global.Promise = require 'bluebird'
+require 'isomorphic-fetch'
 {ok} = require 'assert'
 {token} = require './token.json'
 
@@ -23,7 +24,7 @@ describe 'Qiita', ->
       private: true
     )
     .then (data) ->
-      console.log 'result', data
+      # console.log 'result', data
       done()
 
   # This test need items more than 2

@@ -19,9 +19,13 @@ I will remove this dependency later but not yet. Sorry...
 
 ## How to try
 
-Get your token by https://qiita.com/settings/tokens/new
+Get your token from https://qiita.com/settings/tokens/new
 
 ```javascript
+// Require promise and fetch
+global.Promise = require('bluebird');
+require('isomorphic-fetch')
+
 // require in commonjs env
 var Qiita = require('qiita-js');
 
@@ -29,7 +33,8 @@ var Qiita = require('qiita-js');
 Qiita.setToken('<your token>');
 
 // fetch resources!
-Qiita.Resources.User.get_user('mizchi').then(function(user){
+Qiita.Resources.User.get_user('mizchi')
+.then(function(user){
 	console.log(user);
 });
 ```
@@ -42,11 +47,6 @@ Use your token to run tests.
 echo '{"token": "your token"}' > test/token.json
 npm test
 ```
-
-## TODO
-
-- Support getting oauth key by redirection flow
-- Remove jquery dependency on browser
 
 ## LICENSE
 
