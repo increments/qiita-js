@@ -1,9 +1,10 @@
 {
   "name": "qiita-js",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "main": "lib/index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register"
+    "test": "./node_modules/.bin/mocha --compilers coffee:coffee-script/register",
+    "prepublish": "$(npm bin)/coffee -o lib -c src/*.coffee"
   },
   "author": "mizchi",
   "license": "MIT",
