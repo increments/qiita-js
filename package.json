@@ -15,7 +15,7 @@
     "mocha": "^2.0.1",
     "promise": "^6.1.0",
     "schema-tsifier": "^1.1.6",
-    "isomorphic-fetch": "^2.0.2",
+    "isomorphic-fetch": "increments/isomorphic-fetch#use-increments-node-fetch",
     "typescript": "^1.4.1"
   },
   "repository": {
