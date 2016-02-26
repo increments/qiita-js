@@ -31,6 +31,7 @@ var Qiita = require('qiita-js');
 
 // set your token
 Qiita.setToken('<your token>');
+Qiita.setEndpoint('<your team domain || https://qiita.com>');
 
 // fetch resources!
 Qiita.Resources.User.get_user('mizchi')
