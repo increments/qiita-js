@@ -277,3 +277,6 @@ var Qiita;
         Resources.User = User;
     })(Resources = Qiita.Resources || (Qiita.Resources = {}));
 })(Qiita || (Qiita = {}));
+
+// handy patch
+module.exports = Qiita;
