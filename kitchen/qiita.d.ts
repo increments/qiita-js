@@ -178,6 +178,7 @@ declare module Qiita {
         }
         class AuthenticatedUser {
             static get_authenticated_user(params?: {}): Thenable<any>;
+            static groups(params?: {}): Thenable<any>;
         }
         class Comment {
             static delete_comment(params?: {}): Thenable<any>;
@@ -212,6 +213,7 @@ declare module Qiita {
             static create_item(params: {
                 body: string;
                 coediting: boolean;
+                group_url_name?: string;
                 gist: boolean;
                 private: boolean;
                 tags: any[];
@@ -223,6 +225,7 @@ declare module Qiita {
             static update_item(params: {
                 body: string;
                 coediting: boolean;
+                group_url_name?: string;
                 private: boolean;
                 tags: any[];
                 title: string;

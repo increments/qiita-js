@@ -85,6 +85,13 @@
           "method": "GET",
           "rel": "self",
           "title": "get_authenticated_user"
+        },
+        {
+          "description": "(handy patch) アクセストークンに紐付いたユーザの所属するグループを返します。",
+          "href": "/api/v2/authenticated_user/groups",
+          "method": "GET",
+          "rel": "self",
+          "title": "groups"
         }
       ],
       "properties": {
@@ -649,6 +656,11 @@
                 "example": false,
                 "type": "boolean"
               },
+              "group_url_name": {
+                "description": "(handy patch) 投稿先のグループ名",
+                "example": "increments",
+                "type": ["string", "null"]
+              },
               "gist": {
                 "description": "本文中のコードをGistに投稿するかどうか (GitHub連携を有効化している場合のみ有効)",
                 "example": false,
@@ -738,6 +750,11 @@
                 "description": "この投稿が共同更新状態かどうか (Qiita:Teamでのみ有効)",
                 "example": false,
                 "type": "boolean"
+              },
+              "group_url_name": {
+                "description": "(handy patch) 投稿先のグループ名",
+                "example": "increments",
+                "type": ["string", "null"]
               },
               "private": {
                 "description": "限定共有状態かどうかを表すフラグ (Qiita:Teamでは無効)",

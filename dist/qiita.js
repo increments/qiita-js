@@ -28,6 +28,10 @@ var Qiita;
                 if (params === void 0) { params = {}; }
                 return request('GET', '/api/v2/authenticated_user', params);
             };
+            AuthenticatedUser.groups = function (params) {
+                if (params === void 0) { params = {}; }
+                return request('GET', '/api/v2/authenticated_user/groups', params);
+            };
             return AuthenticatedUser;
         }());
         Resources.AuthenticatedUser = AuthenticatedUser;

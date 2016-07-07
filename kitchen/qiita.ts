@@ -168,6 +168,16 @@ module Qiita {
           params
         );
       }
+
+      public static groups(
+        params = {}
+      ): Thenable<any> {
+        return request(
+          'GET',
+           '/api/v2/authenticated_user/groups' ,
+          params
+        );
+      }
     }
 
     export class Comment {
@@ -279,7 +289,7 @@ module Qiita {
       }
 
       public static create_item(
-        params: { body: string; coediting: boolean; gist: boolean; private: boolean; tags: any[]; title: string; tweet: boolean;  }
+        params: { body: string; coediting: boolean; group_url_name?: string; gist: boolean; private: boolean; tags: any[]; title: string; tweet: boolean;  }
       ): Thenable<any> {
         return request(
           'POST',
@@ -309,7 +319,7 @@ module Qiita {
       }
 
       public static update_item(
-        params: { body: string; coediting: boolean; private: boolean; tags: any[]; title: string;  }
+        params: { body: string; coediting: boolean; group_url_name?: string; private: boolean; tags: any[]; title: string;  }
       ): Thenable<any> {
         return request(
           'PATCH',
