@@ -151,7 +151,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/access_tokens/' + id + '/' ,
+           '/api/v2/access_tokens/' + id ,
           params
         );
       }
@@ -187,7 +187,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/comments/' + id + '/' ,
+           '/api/v2/comments/' + id ,
           params
         );
       }
@@ -197,7 +197,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/comments/' + id + '/' ,
+           '/api/v2/comments/' + id ,
           params
         );
       }
@@ -207,7 +207,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'PATCH',
-           '/api/v2/comments/' + id + '/' ,
+           '/api/v2/comments/' + id ,
           params
         );
       }
@@ -217,7 +217,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/comments/' + id + '//thank' ,
+           '/api/v2/comments/' + id + '/thank' ,
           params
         );
       }
@@ -227,7 +227,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'PUT',
-           '/api/v2/comments/' + id + '//thank' ,
+           '/api/v2/comments/' + id + '/thank' ,
           params
         );
       }
@@ -237,7 +237,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/items/' + id + '//comments' ,
+           '/api/v2/items/' + id + '/comments' ,
           params
         );
       }
@@ -247,7 +247,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'POST',
-           '/api/v2/items/' + id + '//comments' ,
+           '/api/v2/items/' + id + '/comments' ,
           params
         );
       }
@@ -303,7 +303,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/items/' + id + '/' ,
+           '/api/v2/items/' + id ,
           params
         );
       }
@@ -313,7 +313,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/items/' + id + '/' ,
+           '/api/v2/items/' + id ,
           params
         );
       }
@@ -323,7 +323,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'PATCH',
-           '/api/v2/items/' + id + '/' ,
+           '/api/v2/items/' + id ,
           params
         );
       }
@@ -333,7 +333,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/items/' + id + '//like' ,
+           '/api/v2/items/' + id + '/like' ,
           params
         );
       }
@@ -343,7 +343,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'PUT',
-           '/api/v2/items/' + id + '//like' ,
+           '/api/v2/items/' + id + '/like' ,
           params
         );
       }
@@ -353,7 +353,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/items/' + id + '//stock' ,
+           '/api/v2/items/' + id + '/stock' ,
           params
         );
       }
@@ -363,7 +363,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/items/' + id + '//stock' ,
+           '/api/v2/items/' + id + '/stock' ,
           params
         );
       }
@@ -373,7 +373,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/items/' + id + '//like' ,
+           '/api/v2/items/' + id + '/like' ,
           params
         );
       }
@@ -383,7 +383,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'PUT',
-           '/api/v2/items/' + id + '//stock' ,
+           '/api/v2/items/' + id + '/stock' ,
           params
         );
       }
@@ -393,7 +393,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/tags/' + id + '//items' ,
+           '/api/v2/tags/' + id + '/items' ,
           params
         );
       }
@@ -403,7 +403,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/users/' + id + '//items' ,
+           '/api/v2/users/' + id + '/items' ,
           params
         );
       }
@@ -413,7 +413,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/users/' + id + '//stocks' ,
+           '/api/v2/users/' + id + '/stocks' ,
           params
         );
       }
@@ -426,7 +426,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/items/' + id + '//likes' ,
+           '/api/v2/items/' + id + '/likes' ,
           params
         );
       }
@@ -459,7 +459,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/projects/' + id + '/' ,
+           '/api/v2/projects/' + id ,
           params
         );
       }
@@ -469,7 +469,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/projects/' + id + '/' ,
+           '/api/v2/projects/' + id ,
           params
         );
       }
@@ -479,7 +479,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'PATCH',
-           '/api/v2/projects/' + id + '/' ,
+           '/api/v2/projects/' + id ,
           params
         );
       }
@@ -502,7 +502,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/tags/' + id + '/' ,
+           '/api/v2/tags/' + id ,
           params
         );
       }
@@ -512,7 +512,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/users/' + id + '//following_tags' ,
+           '/api/v2/users/' + id + '/following_tags' ,
           params
         );
       }
@@ -522,7 +522,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/tags/' + id + '//following' ,
+           '/api/v2/tags/' + id + '/following' ,
           params
         );
       }
@@ -532,7 +532,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/tags/' + id + '//following' ,
+           '/api/v2/tags/' + id + '/following' ,
           params
         );
       }
@@ -542,7 +542,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'PUT',
-           '/api/v2/tags/' + id + '//following' ,
+           '/api/v2/tags/' + id + '/following' ,
           params
         );
       }
@@ -555,7 +555,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'POST',
-           '/api/v2/items/' + id + '//taggings' ,
+           '/api/v2/items/' + id + '/taggings' ,
           params
         );
       }
@@ -565,7 +565,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/items/' + id + '/' ,
+           '/api/v2/items/' + id ,
           params
         );
       }
@@ -601,7 +601,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/templates/' + id + '/' ,
+           '/api/v2/templates/' + id ,
           params
         );
       }
@@ -611,7 +611,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/templates/' + id + '/' ,
+           '/api/v2/templates/' + id ,
           params
         );
       }
@@ -631,7 +631,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'PATCH',
-           '/api/v2/templates/' + id + '/' ,
+           '/api/v2/templates/' + id ,
           params
         );
       }
@@ -644,7 +644,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/items/' + id + '//stockers' ,
+           '/api/v2/items/' + id + '/stockers' ,
           params
         );
       }
@@ -664,7 +664,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/users/' + id + '/' ,
+           '/api/v2/users/' + id ,
           params
         );
       }
@@ -674,7 +674,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/users/' + id + '//followees' ,
+           '/api/v2/users/' + id + '/followees' ,
           params
         );
       }
@@ -684,7 +684,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/users/' + id + '//followers' ,
+           '/api/v2/users/' + id + '/followers' ,
           params
         );
       }
@@ -694,7 +694,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/users/' + id + '//following' ,
+           '/api/v2/users/' + id + '/following' ,
           params
         );
       }
@@ -704,7 +704,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/users/' + id + '//following' ,
+           '/api/v2/users/' + id + '/following' ,
           params
         );
       }
@@ -714,7 +714,7 @@ module Qiita {
       ): Thenable<any> {
         return request(
           'PUT',
-           '/api/v2/users/' + id + '//following' ,
+           '/api/v2/users/' + id + '/following' ,
           params
         );
       }
