@@ -147,11 +147,11 @@ module Qiita {
       }
 
       public static delete_access_token(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/access_tokens/:access_token' ,
+           '/api/v2/access_tokens/' + id + '/' ,
           params
         );
       }
@@ -183,71 +183,71 @@ module Qiita {
     export class Comment {
 
       public static delete_comment(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/comments/:comment_id' ,
+           '/api/v2/comments/' + id + '/' ,
           params
         );
       }
 
       public static get_comment(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/comments/:comment_id' ,
+           '/api/v2/comments/' + id + '/' ,
           params
         );
       }
 
       public static update_comment(
-        params: { body: string;  }
+        id: string, params: { body: string;  }
       ): Thenable<any> {
         return request(
           'PATCH',
-           '/api/v2/comments/:comment_id' ,
+           '/api/v2/comments/' + id + '/' ,
           params
         );
       }
 
       public static unthank_comment(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/comments/:comment_id/thank' ,
+           '/api/v2/comments/' + id + '//thank' ,
           params
         );
       }
 
       public static thank_comment(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'PUT',
-           '/api/v2/comments/:comment_id/thank' ,
+           '/api/v2/comments/' + id + '//thank' ,
           params
         );
       }
 
       public static list_item_comments(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/items/:item_id/comments' ,
+           '/api/v2/items/' + id + '//comments' ,
           params
         );
       }
 
       public static create_item_comment(
-        params: { body: string;  }
+        id: string, params: { body: string;  }
       ): Thenable<any> {
         return request(
           'POST',
-           '/api/v2/items/:item_id/comments' ,
+           '/api/v2/items/' + id + '//comments' ,
           params
         );
       }
@@ -299,121 +299,121 @@ module Qiita {
       }
 
       public static delete_item(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/items/:item_id' ,
+           '/api/v2/items/' + id + '/' ,
           params
         );
       }
 
       public static get_item(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/items/:item_id' ,
+           '/api/v2/items/' + id + '/' ,
           params
         );
       }
 
       public static update_item(
-        params: { body: string; coediting: boolean; group_url_name?: string; private: boolean; tags: any[]; title: string;  }
+        id: string, params: { body: string; coediting: boolean; group_url_name?: string; private: boolean; tags: any[]; title: string;  }
       ): Thenable<any> {
         return request(
           'PATCH',
-           '/api/v2/items/:item_id' ,
+           '/api/v2/items/' + id + '/' ,
           params
         );
       }
 
       public static unlike_item(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/items/:item_id/like' ,
+           '/api/v2/items/' + id + '//like' ,
           params
         );
       }
 
       public static like_item(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'PUT',
-           '/api/v2/items/:item_id/like' ,
+           '/api/v2/items/' + id + '//like' ,
           params
         );
       }
 
       public static unstock_item(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/items/:item_id/stock' ,
+           '/api/v2/items/' + id + '//stock' ,
           params
         );
       }
 
       public static get_item_stock(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/items/:item_id/stock' ,
+           '/api/v2/items/' + id + '//stock' ,
           params
         );
       }
 
       public static get_item_like(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/items/:item_id/like' ,
+           '/api/v2/items/' + id + '//like' ,
           params
         );
       }
 
       public static stock_item(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'PUT',
-           '/api/v2/items/:item_id/stock' ,
+           '/api/v2/items/' + id + '//stock' ,
           params
         );
       }
 
       public static list_tag_items(
-        params: { page: string; per_page: string;  }
+        id: string, params: { page: string; per_page: string;  }
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/tags/:tag_id/items' ,
+           '/api/v2/tags/' + id + '//items' ,
           params
         );
       }
 
       public static list_user_items(
-        params: { page: string; per_page: string;  }
+        id: string, params: { page: string; per_page: string;  }
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/users/:user_id/items' ,
+           '/api/v2/users/' + id + '//items' ,
           params
         );
       }
 
       public static list_user_stocks(
-        params: { page: string; per_page: string;  }
+        id: string, params: { page: string; per_page: string;  }
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/users/:user_id/stocks' ,
+           '/api/v2/users/' + id + '//stocks' ,
           params
         );
       }
@@ -422,11 +422,11 @@ module Qiita {
     export class Like {
 
       public static list_item_likes(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/items/:item_id/likes' ,
+           '/api/v2/items/' + id + '//likes' ,
           params
         );
       }
@@ -455,31 +455,31 @@ module Qiita {
       }
 
       public static delete_project(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/projects/:project_id' ,
+           '/api/v2/projects/' + id + '/' ,
           params
         );
       }
 
       public static get_project(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/projects/:project_id' ,
+           '/api/v2/projects/' + id + '/' ,
           params
         );
       }
 
       public static patch_project(
-        params: { archived: boolean; body: string; name: string; tags: any[];  }
+        id: string, params: { archived: boolean; body: string; name: string; tags: any[];  }
       ): Thenable<any> {
         return request(
           'PATCH',
-           '/api/v2/projects/:project_id' ,
+           '/api/v2/projects/' + id + '/' ,
           params
         );
       }
@@ -498,51 +498,51 @@ module Qiita {
       }
 
       public static get_tag(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/tags/:tag_id' ,
+           '/api/v2/tags/' + id + '/' ,
           params
         );
       }
 
       public static list_user_following_tags(
-        params: { page: string; per_page: string;  }
+        id: string, params: { page: string; per_page: string;  }
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/users/:user_id/following_tags' ,
+           '/api/v2/users/' + id + '//following_tags' ,
           params
         );
       }
 
       public static unfollow_tag(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/tags/:tag_id/following' ,
+           '/api/v2/tags/' + id + '//following' ,
           params
         );
       }
 
       public static get_tag_following(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/tags/:tag_id/following' ,
+           '/api/v2/tags/' + id + '//following' ,
           params
         );
       }
 
       public static follow_tag(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'PUT',
-           '/api/v2/tags/:tag_id/following' ,
+           '/api/v2/tags/' + id + '//following' ,
           params
         );
       }
@@ -551,21 +551,21 @@ module Qiita {
     export class Tagging {
 
       public static create_tagging(
-        params: { name: string; versions: string[];  }
+        id: string, params: { name: string; versions: string[];  }
       ): Thenable<any> {
         return request(
           'POST',
-           '/api/v2/items/:item_id/taggings' ,
+           '/api/v2/items/' + id + '//taggings' ,
           params
         );
       }
 
       public static delete_tagging(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/items/:item_id/taggings/:tagging_id' ,
+           '/api/v2/items/' + id + '/' ,
           params
         );
       }
@@ -597,21 +597,21 @@ module Qiita {
       }
 
       public static delete_template(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/templates/:template_id' ,
+           '/api/v2/templates/' + id + '/' ,
           params
         );
       }
 
       public static get_template(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/templates/:template_id' ,
+           '/api/v2/templates/' + id + '/' ,
           params
         );
       }
@@ -627,11 +627,11 @@ module Qiita {
       }
 
       public static update_template(
-        params: { body: string; name: string; tags: any[]; title: string;  }
+        id: string, params: { body: string; name: string; tags: any[]; title: string;  }
       ): Thenable<any> {
         return request(
           'PATCH',
-           '/api/v2/templates/:template_id' ,
+           '/api/v2/templates/' + id + '/' ,
           params
         );
       }
@@ -640,11 +640,11 @@ module Qiita {
     export class User {
 
       public static list_item_stockers(
-        params: { page: string; per_page: string;  }
+        id: string, params: { page: string; per_page: string;  }
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/items/:item_id/stockers' ,
+           '/api/v2/items/' + id + '//stockers' ,
           params
         );
       }
@@ -660,61 +660,61 @@ module Qiita {
       }
 
       public static get_user(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/users/:user_id' ,
+           '/api/v2/users/' + id + '/' ,
           params
         );
       }
 
       public static list_user_followees(
-        params: { page: string; per_page: string;  }
+        id: string, params: { page: string; per_page: string;  }
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/users/:user_id/followees' ,
+           '/api/v2/users/' + id + '//followees' ,
           params
         );
       }
 
       public static list_user_followers(
-        params: { page: string; per_page: string;  }
+        id: string, params: { page: string; per_page: string;  }
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/users/:user_id/followers' ,
+           '/api/v2/users/' + id + '//followers' ,
           params
         );
       }
 
       public static unfollow_user(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'DELETE',
-           '/api/v2/users/:user_id/following' ,
+           '/api/v2/users/' + id + '//following' ,
           params
         );
       }
 
       public static get_user_following(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'GET',
-           '/api/v2/users/:user_id/following' ,
+           '/api/v2/users/' + id + '//following' ,
           params
         );
       }
 
       public static follow_user(
-        params = {}
+        id: string, params = {}
       ): Thenable<any> {
         return request(
           'PUT',
-           '/api/v2/users/:user_id/following' ,
+           '/api/v2/users/' + id + '//following' ,
           params
         );
       }

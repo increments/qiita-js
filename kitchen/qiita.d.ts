@@ -174,22 +174,22 @@ declare module Qiita {
                 client_secret: string;
                 code: string;
             }): Thenable<any>;
-            static delete_access_token(params?: {}): Thenable<any>;
+            static delete_access_token(id: string, params?: {}): Thenable<any>;
         }
         class AuthenticatedUser {
             static get_authenticated_user(params?: {}): Thenable<any>;
             static groups(params?: {}): Thenable<any>;
         }
         class Comment {
-            static delete_comment(params?: {}): Thenable<any>;
-            static get_comment(params?: {}): Thenable<any>;
-            static update_comment(params: {
+            static delete_comment(id: string, params?: {}): Thenable<any>;
+            static get_comment(id: string, params?: {}): Thenable<any>;
+            static update_comment(id: string, params: {
                 body: string;
             }): Thenable<any>;
-            static unthank_comment(params?: {}): Thenable<any>;
-            static thank_comment(params?: {}): Thenable<any>;
-            static list_item_comments(params?: {}): Thenable<any>;
-            static create_item_comment(params: {
+            static unthank_comment(id: string, params?: {}): Thenable<any>;
+            static thank_comment(id: string, params?: {}): Thenable<any>;
+            static list_item_comments(id: string, params?: {}): Thenable<any>;
+            static create_item_comment(id: string, params: {
                 body: string;
             }): Thenable<any>;
         }
@@ -220,9 +220,9 @@ declare module Qiita {
                 title: string;
                 tweet: boolean;
             }): Thenable<any>;
-            static delete_item(params?: {}): Thenable<any>;
-            static get_item(params?: {}): Thenable<any>;
-            static update_item(params: {
+            static delete_item(id: string, params?: {}): Thenable<any>;
+            static get_item(id: string, params?: {}): Thenable<any>;
+            static update_item(id: string, params: {
                 body: string;
                 coediting: boolean;
                 group_url_name?: string;
@@ -230,27 +230,27 @@ declare module Qiita {
                 tags: any[];
                 title: string;
             }): Thenable<any>;
-            static unlike_item(params?: {}): Thenable<any>;
-            static like_item(params?: {}): Thenable<any>;
-            static unstock_item(params?: {}): Thenable<any>;
-            static get_item_stock(params?: {}): Thenable<any>;
-            static get_item_like(params?: {}): Thenable<any>;
-            static stock_item(params?: {}): Thenable<any>;
-            static list_tag_items(params: {
+            static unlike_item(id: string, params?: {}): Thenable<any>;
+            static like_item(id: string, params?: {}): Thenable<any>;
+            static unstock_item(id: string, params?: {}): Thenable<any>;
+            static get_item_stock(id: string, params?: {}): Thenable<any>;
+            static get_item_like(id: string, params?: {}): Thenable<any>;
+            static stock_item(id: string, params?: {}): Thenable<any>;
+            static list_tag_items(id: string, params: {
                 page: string;
                 per_page: string;
             }): Thenable<any>;
-            static list_user_items(params: {
+            static list_user_items(id: string, params: {
                 page: string;
                 per_page: string;
             }): Thenable<any>;
-            static list_user_stocks(params: {
+            static list_user_stocks(id: string, params: {
                 page: string;
                 per_page: string;
             }): Thenable<any>;
         }
         class Like {
-            static list_item_likes(params?: {}): Thenable<any>;
+            static list_item_likes(id: string, params?: {}): Thenable<any>;
         }
         class Project {
             static list_projects(params: {
@@ -263,9 +263,9 @@ declare module Qiita {
                 name: string;
                 tags: any[];
             }): Thenable<any>;
-            static delete_project(params?: {}): Thenable<any>;
-            static get_project(params?: {}): Thenable<any>;
-            static patch_project(params: {
+            static delete_project(id: string, params?: {}): Thenable<any>;
+            static get_project(id: string, params?: {}): Thenable<any>;
+            static patch_project(id: string, params: {
                 archived: boolean;
                 body: string;
                 name: string;
@@ -278,21 +278,21 @@ declare module Qiita {
                 per_page: string;
                 sort: string;
             }): Thenable<any>;
-            static get_tag(params?: {}): Thenable<any>;
-            static list_user_following_tags(params: {
+            static get_tag(id: string, params?: {}): Thenable<any>;
+            static list_user_following_tags(id: string, params: {
                 page: string;
                 per_page: string;
             }): Thenable<any>;
-            static unfollow_tag(params?: {}): Thenable<any>;
-            static get_tag_following(params?: {}): Thenable<any>;
-            static follow_tag(params?: {}): Thenable<any>;
+            static unfollow_tag(id: string, params?: {}): Thenable<any>;
+            static get_tag_following(id: string, params?: {}): Thenable<any>;
+            static follow_tag(id: string, params?: {}): Thenable<any>;
         }
         class Tagging {
-            static create_tagging(params: {
+            static create_tagging(id: string, params: {
                 name: string;
                 versions: string[];
             }): Thenable<any>;
-            static delete_tagging(params?: {}): Thenable<any>;
+            static delete_tagging(id: string, params?: {}): Thenable<any>;
         }
         class Team {
             static list_teams(params?: {}): Thenable<any>;
@@ -302,15 +302,15 @@ declare module Qiita {
                 page: string;
                 per_page: string;
             }): Thenable<any>;
-            static delete_template(params?: {}): Thenable<any>;
-            static get_template(params?: {}): Thenable<any>;
+            static delete_template(id: string, params?: {}): Thenable<any>;
+            static get_template(id: string, params?: {}): Thenable<any>;
             static create_template(params: {
                 body: string;
                 name: string;
                 tags: any[];
                 title: string;
             }): Thenable<any>;
-            static update_template(params: {
+            static update_template(id: string, params: {
                 body: string;
                 name: string;
                 tags: any[];
@@ -318,7 +318,7 @@ declare module Qiita {
             }): Thenable<any>;
         }
         class User {
-            static list_item_stockers(params: {
+            static list_item_stockers(id: string, params: {
                 page: string;
                 per_page: string;
             }): Thenable<any>;
@@ -326,18 +326,18 @@ declare module Qiita {
                 page: string;
                 per_page: string;
             }): Thenable<any>;
-            static get_user(params?: {}): Thenable<any>;
-            static list_user_followees(params: {
+            static get_user(id: string, params?: {}): Thenable<any>;
+            static list_user_followees(id: string, params: {
                 page: string;
                 per_page: string;
             }): Thenable<any>;
-            static list_user_followers(params: {
+            static list_user_followers(id: string, params: {
                 page: string;
                 per_page: string;
             }): Thenable<any>;
-            static unfollow_user(params?: {}): Thenable<any>;
-            static get_user_following(params?: {}): Thenable<any>;
-            static follow_user(params?: {}): Thenable<any>;
+            static unfollow_user(id: string, params?: {}): Thenable<any>;
+            static get_user_following(id: string, params?: {}): Thenable<any>;
+            static follow_user(id: string, params?: {}): Thenable<any>;
         }
     }
 }
